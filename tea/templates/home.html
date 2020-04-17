@@ -1,0 +1,210 @@
+{% extends 'base1.html' %}
+
+
+{% block content %}
+
+<div class="jumbotron">
+  <h1 class="display-4">Welcome To Crypto News Network!</h1>
+  <p class="lead">Your Source For Up To The Minute Crypto Currency and Blockchain News!</p>
+
+</div>
+<br/>
+<script>
+  poll = () => {
+    $.ajax({
+      url:"/news/api/",
+        // "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,XRP,BCH,EOS,LTC,XLM,ADA,USDT,MIOTA,TRX&tsyms=USD",
+      type: "GET",
+      success: function (data) {
+        /*console.log(data);*/
+        var event_data = '';
+        i = 0;
+
+        $.each(data.RAW, function (index, value) {
+          /*console.log(value);*/
+          /*event_data += '<tr>';
+          event_data += '<td>' + index + '</td>';
+          event_data += '<td>' + value.USD.PRICE + '</td>';
+          event_data += '<td>' + value.USD.HIGHDAY + '</td>';
+          event_data += '<td>' + value.USD.LOWDAY + '</td>';
+          event_data += '<td>' + value.USD.MKTCAP + '</td>';
+          event_data += '</tr>';*/
+          $('#list_table_json td').eq(i).html(index); i++
+          $('#list_table_json td').eq(i).html(value.USD.PRICE); i++
+          $('#list_table_json td').eq(i).html(value.USD.HIGHDAY); i++
+          $('#list_table_json td').eq(i).html(value.USD.LOWDAY); i++
+          $('#list_table_json td').eq(i).html(value.USD.MKTCAP); i++
+        });
+        $("#list_table_json").append(event_data);
+      },
+      dataType: "json",
+      complete: setTimeout(poll, 5000),
+      timeout: 2000
+    });
+  }
+  poll()
+</script>
+
+<table class="table table-striped table-bordered table-hover table-sm" id="list_table_json">
+  <thead>
+    <tr>
+      <th scope="col">Name </th>
+      <th scope="col">Price</th>
+      <th scope="col">24h High</th>
+      <th scope="col">24h Low</th>
+      <th scope="col">Market Cap</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr id="1">
+      <td id="1">Loading...</td>
+      <td id="2">Loading...</td>
+      <td id="3">Loading...</td>
+      <td id="4">Loading...</td>
+      <td id="5">Loading...</td>
+    </tr>
+    <tr id="2">
+      <td id="1">Loading...</td>
+      <td id="2">Loading...</td>
+      <td id="3">Loading...</td>
+      <td id="4">Loading...</td>
+      <td id="5">Loading...</td>
+    </tr>
+    <tr id="3">
+      <td id="1">Loading...</td>
+      <td id="2">Loading...</td>
+      <td id="3">Loading...</td>
+      <td id="4">Loading...</td>
+      <td id="5">Loading...</td>
+    </tr>
+    <tr id="4">
+      <td id="1">Loading...</td>
+      <td id="2">Loading...</td>
+      <td id="3">Loading...</td>
+      <td id="4">Loading...</td>
+      <td id="5">Loading...</td>
+    </tr>
+    <tr id="5">
+      <td id="1">Loading...</td>
+      <td id="2">Loading...</td>
+      <td id="3">Loading...</td>
+      <td id="4">Loading...</td>
+      <td id="5">Loading...</td>
+    </tr>
+    <tr id="6">
+      <td id="1">Loading...</td>
+      <td id="2">Loading...</td>
+      <td id="3">Loading...</td>
+      <td id="4">Loading...</td>
+      <td id="5">Loading...</td>
+    </tr>
+    <tr id="7">
+      <td id="1">Loading...</td>
+      <td id="2">Loading...</td>
+      <td id="3">Loading...</td>
+      <td id="4">Loading...</td>
+      <td id="5">Loading...</td>
+    </tr>
+    <tr id="8">
+      <td id="1">Loading...</td>
+      <td id="2">Loading...</td>
+      <td id="3">Loading...</td>
+      <td id="4">Loading...</td>
+      <td id="5">Loading...</td>
+    </tr>
+    <tr id="9">
+      <td id="1">Loading...</td>
+      <td id="2">Loading...</td>
+      <td id="3">Loading...</td>
+      <td id="4">Loading...</td>
+      <td id="5">Loading...</td>
+    </tr>
+    <tr id="10">
+      <td id="1">Loading...</td>
+      <td id="2">Loading...</td>
+      <td id="3">Loading...</td>
+      <td id="4">Loading...</td>
+      <td id="5">Loading...</td>
+    </tr>
+    <tr id="11">
+      <td id="1">Loading...</td>
+      <td id="2">Loading...</td>
+      <td id="3">Loading...</td>
+      <td id="4">Loading...</td>
+      <td id="5">Loading...</td>
+    </tr>
+
+
+  </tbody>
+</table>
+
+<!-- <table class="table table-striped table-bordered table-hover table-sm">
+  <thead>
+    <tr>
+      <th scope="col">Name </th>
+      <th scope="col">Price</th>
+      <th scope="col">24h High</th>
+      <th scope="col">24h Low</th>
+      <th scope="col">Market Cap</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for key,value in price.DISPLAY.items %}
+
+  
+    <tr>
+      <td>{{ key }}</td>
+      <td>{{ value.USD.PRICE }}</td>
+      <td>{{ value.USD.HIGHDAY }}</td>
+      <td>{{ value.USD.LOWDAY }}</td>
+      <td>{{ value.USD.MKTCAP }}</td>
+    </tr>
+{% endfor %}
+
+  </tbody>
+</table> -->
+
+
+
+
+
+<br/><br/>
+
+
+
+
+
+<div class="container">
+	<div class="row">
+    {% for x in api.Data %}
+      <script>
+        function init() {
+        var imgDefer = document.getElementsByTagName('img');
+        for (var i=0; i<imgDefer.length; i++) {
+        if(imgDefer[i].getAttribute('data-src')) {
+        imgDefer[i].setAttribute('src',imgDefer[i].getAttribute('data-src'));
+        } } }
+        window.onload = init;
+        </script>
+			<div class="col-sm">
+				<div class="card" style="width: 18rem;">
+				  <img class="card-img-top" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="{{ x.imageurl }}" alt="{{ x.source }}"><!-- src="{{ x.imageurl }}" alt="{{ x.source }}"> -->
+				  <div class="card-body">
+				    <h5 class="card-title">{{ x.title }}</h5>
+				    <p class="card-text">{{ x.body|slice:"200" }}...</p>
+				    <a href="{{ x.url }}" class="btn btn-secondary">Read More...</a>
+				  </div>
+				</div>
+				<br/>
+			</div>
+		{% endfor %}
+	</div>
+</div>
+
+
+	
+
+	<!-- {{ api.Data }} -->
+
+{% endblock %}
+
